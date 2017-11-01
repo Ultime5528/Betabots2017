@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5528.robot.subsystems;
 
+import org.usfirst.frc.team5528.robot.ADIS16448_IMU;
 import org.usfirst.frc.team5528.robot.Robot;
 import org.usfirst.frc.team5528.robot.RobotMap;
 import org.usfirst.frc.team5528.robot.commands.Pilotage;
@@ -19,6 +20,7 @@ public class BasePilotable extends Subsystem {
 	private VictorSP moteurGauche;
 	private VictorSP moteurDroit; 
 	private RobotDrive robotDrive;
+	private ADIS16448_IMU gyro;
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -32,6 +34,9 @@ public class BasePilotable extends Subsystem {
 		LiveWindow.addActuator("BasePilotable","MoteurDroit", moteurDroit);
 		
 		robotDrive = new RobotDrive(moteurGauche, moteurDroit);
+		
+		gyro = new ADIS16448_IMU();
+		LiveWindow.addSensor("BasePilotable","Gyro", gyro);
 	}
 	
     public void drive() {
