@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5528.robot;
 
+import org.usfirst.frc.team5528.robot.commands.Tourner;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -47,6 +49,11 @@ public class OI {
 		
 		joystick = new Joystick(RobotMap.joystick);
 		button2 = new JoystickButton(joystick, 2);
+		
+		
+		button11 = new JoystickButton(joystick, 11);
+		button11.whenPressed(new Tourner());
+		
 		
 		
 		

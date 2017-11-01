@@ -38,7 +38,13 @@ public class BasePilotable extends Subsystem {
 		
 		gyro = new ADIS16448_IMU();
 		LiveWindow.addSensor("BasePilotable","Gyro", gyro);
+		gyro.calibrate();
 	}
+	
+	public void resetGyro(){
+		gyro.reset();
+	}
+	
 	
     public void drive() {
     	SmartDashboard.putNumber("AngleX", gyro.getAngleX());
@@ -49,7 +55,7 @@ public class BasePilotable extends Subsystem {
     
     
 	public double getAngle(){
-		return gyro.getAngleY();
+		return gyro.getAngleX();
 	}
 	
 	public void drive(double move, double turn){
