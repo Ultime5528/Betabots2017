@@ -23,6 +23,11 @@ public class Camera extends Subsystem {
     public Camera(){
     	
     	camera = new UsbCamera("Camera principal", 0);
+    	
+    }
+    
+    
+    public void startLoop() {
     	Thread vision = new Thread(this::visionLoop);
     	vision.start();
     	
