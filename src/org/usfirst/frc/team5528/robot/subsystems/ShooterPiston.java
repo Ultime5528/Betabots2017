@@ -11,30 +11,28 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class ShooterPiston extends Subsystem {
 
-    
-	
-	
+
+
+
 	private DoubleSolenoid piston;
-	
+
 
 	public ShooterPiston(){
-		
-	piston = new DoubleSolenoid(RobotMap.SHOOTER_PISTON_A,RobotMap.SHOOTER_PISTON_B);
-	LiveWindow.add
-		
-		
-		
-		
+
+		piston = new DoubleSolenoid(RobotMap.SHOOTER_PISTON_A,RobotMap.SHOOTER_PISTON_B);
+		LiveWindow.addActuator("ShooterPison", "Piston", piston);
+
+
 	}
 
 
-	
-	
-	
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+
+
+
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		//setDefaultCommand(new MySpecialCommand());
+	}
 }
 
