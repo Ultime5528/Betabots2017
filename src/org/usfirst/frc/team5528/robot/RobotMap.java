@@ -16,6 +16,10 @@ public class RobotMap {
 	public final static int enc1a = 4;
 	public final static int enc1b = 5;
 	public final static int SHOOTER_MOTEUR = 7;
+	public final static int TOURELLE_MOTEUR = 8;
+	public final static int TOURELLE_POTENTIOMETRE = 10;	
+	public final static int SHOOTER_PISTON_A = 1;
+	public final static int SHOOTER_PISTON_B = 2;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
