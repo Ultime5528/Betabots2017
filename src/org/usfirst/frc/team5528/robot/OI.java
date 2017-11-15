@@ -52,9 +52,10 @@ public class OI {
 		button2 = new JoystickButton(joystick, 2);
 		
 		button1 = new JoystickButton(joystick, 1);
-		button1.toggleWhenPressed(new Shoot());
+		//button1.toggleWhenPressed(new Shoot());
 		button11 = new JoystickButton(joystick, 11);
 		button11.whenPressed(new Tourner());
+		
 		
 		
 		
