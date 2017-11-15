@@ -72,28 +72,23 @@ public class ShooterPiston extends Subsystem {
 	public void setReverse(int piston) {
 
 		if(piston == 1){
-			
 			piston1.set(DoubleSolenoid.Value.kReverse);
 			
 		}
 		else if(piston == 2){
-			
-			
 			piston2.set(DoubleSolenoid.Value.kReverse);
-			
+	
 		}
 		else if (piston == 3){
-			
 			piston3.set(DoubleSolenoid.Value.kReverse);
 			
 		}
 		else if  (piston == 4){
-			
 			piston4.set(DoubleSolenoid.Value.kReverse);
-			
 			
 				}
 			}
+	
 		public void setAllOff() {
 
 			piston1.set(DoubleSolenoid.Value.kOff);
