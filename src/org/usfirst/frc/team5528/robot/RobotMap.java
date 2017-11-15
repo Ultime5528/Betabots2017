@@ -18,8 +18,17 @@ public class RobotMap {
 	public final static int SHOOTER_MOTEUR = 7;
 	public final static int TOURELLE_MOTEUR = 8;
 	public final static int TOURELLE_POTENTIOMETRE = 10;	
-	public final static int SHOOTER_PISTON_A = 1;
-	public final static int SHOOTER_PISTON_B = 2;
+	public final static int SHOOTER_PISTON1_A = 1;
+	public final static int SHOOTER_PISTON1_B = 2;
+	public final static int SHOOTER_PISTON2_A = 1;
+	public final static int SHOOTER_PISTON2_B = 2;
+	public final static int SHOOTER_PISTON3_A = 1;
+	public final static int SHOOTER_PISTON3_B = 2;
+	public final static int SHOOTER_PISTON4_A = 1;
+	public final static int SHOOTER_PISTON4_B = 2;
+	
+	
+	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;

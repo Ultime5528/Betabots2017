@@ -12,6 +12,7 @@ import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
 import org.usfirst.frc.team5528.robot.subsystems.Camera;
 import org.usfirst.frc.team5528.robot.subsystems.Shooter;
+import org.usfirst.frc.team5528.robot.subsystems.ShooterPiston;
 
 
 /**
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final Shooter shooter = new Shooter();
 	public static final Camera camera = new Camera();
 	public static final Tourelle tourelle = new Tourelle();
+	public static final ShooterPiston shooterPiston = new ShooterPiston();
 
 	
 	public static OI oi;
