@@ -18,7 +18,7 @@ public class Shoot extends Command {
     	// Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooterPiston);
-    	setTimeout(0.5);
+    	setTimeout(1);
     }
 
     // Called just before this Command runs the first time
@@ -48,7 +48,7 @@ public class Shoot extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.shooterPiston.setAllOff();
     	
-    	end();
     }
 }

@@ -1,8 +1,17 @@
 package org.usfirst.frc.team5528.robot.subsystems;
 
+import java.util.ArrayList;
+
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
+
+
+
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team5528.robot.GripPipeline;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -48,7 +57,7 @@ public class Camera extends Subsystem {
     	Mat img = new Mat (480 , 360 , CvType.CV_8UC3, new Scalar(255, 0, 0));
     	
     	while(!Thread.interrupted()) {
-    		
+    	
     		try {
     			sink.grabFrame(img);
     			sourceAvant.putFrame(img);
@@ -60,6 +69,36 @@ public class Camera extends Subsystem {
     		
     	}
     }
+    
+    
+    public void analyse(Mat input) {
+    	
+    	GripPipeline.getInstance().process(input);
+    	
+    	ArrayList<MatOfPoint> contours = GripPipeline.getInstance().filterContoursOutput();
+    
+    	double centre ; 
+    	double hauteur ;
+    	
+    	if(contours.size() == 0) {
+    		
+   
+    	}
+    	
+    	else if (contours.size() == 1) {
+    		
+    		Rect rect = Imgproc.boundingRect(contours.get(0));
+    		centre = rect.x + rect.width/2.0;
+    		hauteur = rect.height;
+    	}
+    	
+    	else {
+    		
+    	}
+    }
+    
+    
+    
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
