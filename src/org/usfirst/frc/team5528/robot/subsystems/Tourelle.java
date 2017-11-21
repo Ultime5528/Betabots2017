@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -21,8 +22,10 @@ public class Tourelle extends Subsystem {
 
 	public Tourelle(){
 		moteurTourelle = new VictorSP(RobotMap.TOURELLE_MOTEUR);
+		LiveWindow.addActuator("Tourelle", "moteur", moteurTourelle);
+		
 		pot = new AnalogPotentiometer(RobotMap.TOURELLE_POTENTIOMETRE);
-				
+		LiveWindow.addSensor("Tourelle", "potentiometre", pot);		
 	}
 	public void tournerGauche(){
 		 moteurTourelle.set(0.25);

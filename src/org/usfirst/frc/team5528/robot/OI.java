@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5528.robot;
 
+import org.usfirst.frc.team5528.robot.commands.OrienterTourelle;
 import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.commands.Tourner;
 
@@ -46,13 +47,23 @@ public class OI {
 	JoystickButton button3;
 	JoystickButton button11, button12;
 	JoystickButton button1;
+	JoystickButton button9;
 	public OI() {
 		
 		joystick = new Joystick(RobotMap.joystick);
-		button2 = new JoystickButton(joystick, 2);
 		
 		button1 = new JoystickButton(joystick, 1);
-		//button1.toggleWhenPressed(new Shoot());
+		button1.whenPressed(new Shoot(1));
+		
+		button2 = new JoystickButton(joystick, 2);
+		button2.whenPressed(new OrienterTourelle(0.43));
+		
+		button3 = new JoystickButton(joystick, 3);
+		button3.whenPressed(new OrienterTourelle(0.35));
+		
+		button9 = new JoystickButton(joystick, 9);
+		button9.whenPressed(new Shoot(2));
+		
 		button11 = new JoystickButton(joystick, 11);
 		button11.whenPressed(new Tourner());
 		

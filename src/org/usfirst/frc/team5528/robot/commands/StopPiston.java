@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class StopPiston extends Command {
 	
+	
 
     public StopPiston() {
         // Use requires() here to declare subsystem dependencies

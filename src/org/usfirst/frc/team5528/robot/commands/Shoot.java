@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shoot extends Command {
 
+	public static double TIMEOUT = 1;
+	
 	private int piston;
 
 
@@ -18,7 +20,7 @@ public class Shoot extends Command {
     	// Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooterPiston);
-    	setTimeout(1);
+    	setTimeout(TIMEOUT);
     }
 
     // Called just before this Command runs the first time

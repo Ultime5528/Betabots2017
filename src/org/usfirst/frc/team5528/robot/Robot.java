@@ -2,12 +2,14 @@
 package org.usfirst.frc.team5528.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
 import org.usfirst.frc.team5528.robot.subsystems.Camera;
@@ -92,6 +94,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		update();
 		SmartDashboard.putData("Scheduler", Scheduler.getInstance());
 	}
 
@@ -102,7 +105,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		
 		Scheduler.getInstance().run();
-		
+		SmartDashboard.putNumber("pot", Robot.tourelle.getPosition());
 		
 	}
 
@@ -113,4 +116,15 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
+	
+	
+	public void update() {
+		
+		Shoot.TIMEOUT = Preferences.getInstance().getDouble("shoot_timeout", Shoot.TIMEOUT);
+		
+	}
+	
+	
+	
 }
