@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5528.robot;
 
 import org.usfirst.frc.team5528.robot.commands.OrienterTourelle;
+import org.usfirst.frc.team5528.robot.commands.SchedulePiston;
 import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.commands.Tourner;
 
@@ -44,28 +45,44 @@ public class OI {
 	
 	Joystick joystick; 
 	JoystickButton button2;
-	JoystickButton button3;
+	JoystickButton button3, button4;
 	JoystickButton button11, button12;
 	JoystickButton button1;
-	JoystickButton button9;
+	JoystickButton button9, button6, button5, button7, button8;
 	public OI() {
 		
 		joystick = new Joystick(RobotMap.joystick);
 		
 		button1 = new JoystickButton(joystick, 1);
-		button1.whenPressed(new Shoot(1));
+		button1.whenPressed(new SchedulePiston(1));
 		
 		button2 = new JoystickButton(joystick, 2);
-		button2.whenPressed(new OrienterTourelle(0.43));
+		button2.whenPressed(new SchedulePiston(2));
 		
 		button3 = new JoystickButton(joystick, 3);
-		button3.whenPressed(new OrienterTourelle(0.35));
+		button3.whenPressed(new SchedulePiston(3));
+		
+		button4 = new JoystickButton(joystick, 4);
+		button4.whenPressed(new SchedulePiston(4));
+		
+		button5 = new JoystickButton(joystick, 5);
+		button5.whenPressed(new OrienterTourelle(0.43));
+		
+		button6 = new JoystickButton(joystick, 6);
+		button6.whenPressed(new OrienterTourelle(0.35));
+		
+		button7 = new JoystickButton(joystick, 7);
+		button7.whenPressed(new OrienterTourelle(0.322)); // Avec 2 a gauche
+		
+		button8 = new JoystickButton(joystick, 8);
+		button8.whenPressed(new OrienterTourelle(0.226)); // Avec 2 a droite
+		
 		
 		button9 = new JoystickButton(joystick, 9);
-		button9.whenPressed(new Shoot(2));
+		button9.whenPressed(new OrienterTourelle(0.478)); // Camera centree
 		
 		button11 = new JoystickButton(joystick, 11);
-		button11.whenPressed(new Tourner());
+		button11.whenPressed(new OrienterTourelle(0.458)); // Cotes libres
 		
 		
 		

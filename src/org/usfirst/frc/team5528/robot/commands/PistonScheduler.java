@@ -2,54 +2,49 @@ package org.usfirst.frc.team5528.robot.commands;
 
 import org.usfirst.frc.team5528.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
  */
-public class Shoot extends Command {
+public class PistonScheduler extends Command {
 
-	public static double TIMEOUT = 0.5;
+	Command currentCommand = null;
 	
-	private int piston;
-
-
-    public Shoot(int piston) {
-    	this.piston = piston;
-    	// Use requires() here to declare subsystem dependencies
+    public PistonScheduler() {
+        // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooterPiston);
-    	setTimeout(TIMEOUT);
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    //	Robot.shooter.setSetpoint(60);
-    	Robot.shooterPiston.setForward(piston);
-    	//Robot.shooter.enable();
     }
-    
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	if(Robot.shooterPiston.getQueue().peek() != null) {
+    		currentCommand = Robot.shooterPiston.getQueue().poll();
+    		Robot.shooterPiston.setStartNextCommand(false);
+    		Scheduler.getInstance().add(currentCommand);
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooterPiston.setReverse(piston);
-    		
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooterPiston.setAllOff();
-    	
     }
 }

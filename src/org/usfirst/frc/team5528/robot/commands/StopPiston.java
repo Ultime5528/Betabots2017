@@ -9,34 +9,40 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class StopPiston extends Command {
 	
-	
+	private int piston;
 
-    public StopPiston() {
+    public StopPiston(int piston) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.shooterPiston);
+    	setTimeout(Shoot.TIMEOUT);
+    	this.piston = piston;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooterPiston.setAllOff();
+    	Robot.shooterPiston.setReverse(piston);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooterPiston.setAllOff();
+    	Robot.shooterPiston.setStartNextCommand(true);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
 

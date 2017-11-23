@@ -17,12 +17,12 @@ public class RobotMap {
 	public final static int enc1b = 5;
 	public final static int TOURELLE_MOTEUR = 2;
 	public final static int TOURELLE_POTENTIOMETRE = 0;	
-	public final static int SHOOTER_PISTON1_A = 0;
-	public final static int SHOOTER_PISTON1_B = 1;
-	public final static int SHOOTER_PISTON2_A = 2;
-	public final static int SHOOTER_PISTON2_B = 3;
-	public final static int SHOOTER_PISTON3_A = 4;
-	public final static int SHOOTER_PISTON3_B = 5;
+	public final static int SHOOTER_PISTON1_A = 4;
+	public final static int SHOOTER_PISTON1_B = 5;
+	public final static int SHOOTER_PISTON2_A = 3;
+	public final static int SHOOTER_PISTON2_B = 2;
+	public final static int SHOOTER_PISTON3_A = 1;
+	public final static int SHOOTER_PISTON3_B = 0;
 	public final static int SHOOTER_PISTON4_A = 6;
 	public final static int SHOOTER_PISTON4_B = 7;
 	
