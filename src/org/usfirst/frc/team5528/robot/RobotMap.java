@@ -25,6 +25,8 @@ public class RobotMap {
 	public final static int SHOOTER_PISTON3_B = 0;
 	public final static int SHOOTER_PISTON4_A = 6;
 	public final static int SHOOTER_PISTON4_B = 7;
+	public final static int BasePilotable_Encoder_A = 0;
+	public final static int BasePilotable_Encoder_B = 1;
 	
 	
 	

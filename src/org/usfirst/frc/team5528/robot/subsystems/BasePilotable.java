@@ -1,11 +1,16 @@
 
 package org.usfirst.frc.team5528.robot.subsystems;
 
-import org.usfirst.frc.team5528.robot.ADIS16448_IMU;
+import javax.sql.rowset.spi.SyncResolver;
+
 import org.usfirst.frc.team5528.robot.Robot;
 import org.usfirst.frc.team5528.robot.RobotMap;
 import org.usfirst.frc.team5528.robot.commands.Pilotage;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,8 +26,24 @@ public class BasePilotable extends Subsystem {
 	private VictorSP moteurGauche;
 	private VictorSP moteurDroit; 
 	private RobotDrive robotDrive;
-	private ADIS16448_IMU gyro;
+	private ADXRS450_Gyro gyro;
+	private PIDController pidAvance;
+	private PIDController pidAngle;
+	private Encoder enc;
 	
+	
+	private double valeurAvance = 0.0;
+	private double valeurAngle = 0.0;
+	public Object lock;
+	
+	
+	public static double P_Avance = 0;
+	public static double I_Avance = 0;
+	public static double D_Avance = 0;
+	public static double P_Angle = 0;
+	public static double I_Angle = 0;
+	public static double D_Angle = 0;
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
@@ -36,10 +57,35 @@ public class BasePilotable extends Subsystem {
 		
 		robotDrive = new RobotDrive(moteurGauche, moteurDroit);
 		
-		gyro = new ADIS16448_IMU();
+		enc = new Encoder(RobotMap.BasePilotable_Encoder_A,RobotMap.BasePilotable_Encoder_B);
+		
+		gyro = new ADXRS450_Gyro();
 		LiveWindow.addSensor("BasePilotable","Gyro", gyro);
 		gyro.calibrate();
+		
+		lock = new Object();
+		
+		pidAvance = new PIDController(P_Avance, I_Avance, D_Avance, enc, this::setValeurAvance);
+		pidAngle = new PIDController(P_Angle, I_Angle, D_Angle, gyro, this:: setValeurAngle);		
 	}
+	
+	
+	private void setValeurAvance(double valeur) {
+		
+		synchronized (lock) {
+			valeurAvance = valeur;
+		}
+		
+	}
+	 
+	private void setValeurAngle(double valeur) {
+		
+		synchronized (lock) {
+			valeurAngle = valeur;
+		}
+		
+	}
+	
 	
 	public void resetGyro(){
 		gyro.reset();
@@ -47,16 +93,14 @@ public class BasePilotable extends Subsystem {
 	
 	
     public void drive() {
-    	SmartDashboard.putNumber("AngleX", gyro.getAngleX());
-    	SmartDashboard.putNumber("AngleY", gyro.getAngleY());
-    	SmartDashboard.putNumber("AngleZ", gyro.getAngleZ());
-    	robotDrive.arcadeDrive(Robot.oi.getJoystick().getY()*-1, Robot.oi.getJoystick().getX());
+    	SmartDashboard.putNumber("Angle", gyro.getAngle());
+    	robotDrive.arcadeDrive(Robot.oi.getJoystick().getY(), Robot.oi.getJoystick().getX());
     }
     
   
     
 	public double getAngle(){
-		return gyro.getAngleX();
+		return gyro.getAngle();
 	}
 	
 	public void drive(double move, double turn){
