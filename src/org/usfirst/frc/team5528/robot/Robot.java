@@ -106,6 +106,7 @@ public class Robot extends IterativeRobot {
 		
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("pot", Robot.tourelle.getPosition());
+		SmartDashboard.putNumber("angle", Robot.basePilotable.getAngle());
 		
 	}
 
@@ -122,7 +123,13 @@ public class Robot extends IterativeRobot {
 	public void update() {
 		
 		Shoot.TIMEOUT = Preferences.getInstance().getDouble("shoot_timeout", Shoot.TIMEOUT);
-		
+		BasePilotable.P_Angle = Preferences.getInstance().getDouble("p_angle", BasePilotable.P_Angle);
+		BasePilotable.I_Angle = Preferences.getInstance().getDouble("i_angle", BasePilotable.I_Angle);
+		BasePilotable.D_Angle = Preferences.getInstance().getDouble("d_angle", BasePilotable.D_Angle);
+		BasePilotable.TOLERANCE_ANGLE = Preferences.getInstance().getDouble("tolerance_angle", BasePilotable.TOLERANCE_ANGLE);
+		Robot.basePilotable.getPidAngle().setPID(BasePilotable.P_Angle, BasePilotable.I_Angle, BasePilotable.D_Angle);
+		Robot.basePilotable.getPidAngle().setAbsoluteTolerance(BasePilotable.TOLERANCE_ANGLE);
+	
 	}
 	
 	

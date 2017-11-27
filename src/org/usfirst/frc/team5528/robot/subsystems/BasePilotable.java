@@ -43,7 +43,7 @@ public class BasePilotable extends Subsystem {
 	public static double P_Angle = 0;
 	public static double I_Angle = 0;
 	public static double D_Angle = 0;
-
+	public static double TOLERANCE_ANGLE = 0.2;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
@@ -56,6 +56,7 @@ public class BasePilotable extends Subsystem {
 		LiveWindow.addActuator("BasePilotable","MoteurDroit", moteurDroit);
 		
 		robotDrive = new RobotDrive(moteurGauche, moteurDroit);
+		robotDrive.setMaxOutput(0.55);
 		
 		enc = new Encoder(RobotMap.BasePilotable_Encoder_A,RobotMap.BasePilotable_Encoder_B);
 		
@@ -66,9 +67,16 @@ public class BasePilotable extends Subsystem {
 		lock = new Object();
 		
 		pidAvance = new PIDController(P_Avance, I_Avance, D_Avance, enc, this::setValeurAvance);
-		pidAngle = new PIDController(P_Angle, I_Angle, D_Angle, gyro, this:: setValeurAngle);		
+		
+		pidAngle = new PIDController(P_Angle, I_Angle, D_Angle, gyro, this::setValeurAngle);	
+		pidAngle.setAbsoluteTolerance(TOLERANCE_ANGLE);
+		pidAngle.setOutputRange(-0.6, 0.6);
+		
 	}
 	
+	public PIDController getPidAngle() {
+		return pidAngle;
+	}
 	
 	private void setValeurAvance(double valeur) {
 		
@@ -87,6 +95,18 @@ public class BasePilotable extends Subsystem {
 	}
 	
 	
+	public void setSetpointAngle(double setpoint){
+		pidAngle.setSetpoint(setpoint);
+	}
+	
+	public void enableAngle(){
+		pidAngle.enable();
+	}
+	
+	public void disableAngle(){
+		pidAngle.disable();
+	}
+	
 	public void resetGyro(){
 		gyro.reset();
 	}
@@ -94,10 +114,27 @@ public class BasePilotable extends Subsystem {
 	
     public void drive() {
     	SmartDashboard.putNumber("Angle", gyro.getAngle());
-    	robotDrive.arcadeDrive(Robot.oi.getJoystick().getY(), Robot.oi.getJoystick().getX());
+    	robotDrive.arcadeDrive(Robot.oi.getJoystick().getY()*-1, -1* Robot.oi.getJoystick().getX());
     }
     
+    public void drivePid(){
+    	
+    	double _valeurAngle, _valeurAvance;
+    	
+    	synchronized (lock) {
+			_valeurAngle = valeurAngle;
+			_valeurAvance = valeurAvance;
+			
+		}
+    	
+    	robotDrive.arcadeDrive(_valeurAvance, _valeurAngle);
+    	
+    }
   
+    public boolean angleOnTarget(){
+    	
+    	return pidAngle.onTarget();
+    }
     
 	public double getAngle(){
 		return gyro.getAngle();

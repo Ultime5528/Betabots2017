@@ -7,6 +7,7 @@ import org.usfirst.frc.team5528.robot.commands.Tourner;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -86,7 +87,9 @@ public class OI {
 		
 		
 		
-		
+		SmartDashboard.putData("Tourner 45", new Tourner(45.0));
+		SmartDashboard.putData("Tourner 90", new Tourner(90.0));
+		SmartDashboard.putData("Tourner -20", new Tourner(-20.0));
 		
 		
 	}
