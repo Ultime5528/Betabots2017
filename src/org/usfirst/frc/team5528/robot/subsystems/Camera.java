@@ -2,7 +2,6 @@ package org.usfirst.frc.team5528.robot.subsystems;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.Lock;
 import java.util.function.BiConsumer;
 
 import org.opencv.core.CvType;
@@ -64,12 +63,12 @@ public class Camera extends Subsystem {
     	
     	CvSink sink = new CvSink ("SinkCam");
     	sink.setSource(camera);
+    	cs.addServer(sink);
     	
     	CvSource sourceAvant = new CvSource ("SourceAvant", PixelFormat.kMJPEG, LARGEUR, HAUTEUR, 30);
     	cs.addCamera(sourceAvant);
     	MjpegServer serverAvant = cs.addServer("ServerAvant");
     	serverAvant.setSource(sourceAvant);
-    	cs.addServer(serverAvant);
     	
     	Mat img = new Mat (LARGEUR , HAUTEUR , CvType.CV_8UC3, new Scalar(255, 0, 0));
     	
