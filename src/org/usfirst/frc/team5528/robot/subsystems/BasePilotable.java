@@ -84,7 +84,7 @@ public class BasePilotable extends Subsystem {
 		return pidAngle;
 	}
 	public PIDController getPidAvance(){
-		return pidAngle;
+		return pidAvance;
 	}
 	
 	public void setValeurAvance(double valeur) {
