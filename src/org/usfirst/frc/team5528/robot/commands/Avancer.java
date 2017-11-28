@@ -19,7 +19,7 @@ public class Avancer extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.basePilotable.resetEnc();
-    	Robot.basePilotable.setSetpointAngle(distance);
+    	Robot.basePilotable.setSetpointDistance(distance);
     	Robot.basePilotable.setValeurAngle(0.0);
     	Robot.basePilotable.enableDistance();
     	
