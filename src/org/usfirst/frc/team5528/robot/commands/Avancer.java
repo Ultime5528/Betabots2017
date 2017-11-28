@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5528.robot.commands;
 
-
 import org.usfirst.frc.team5528.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,23 +7,22 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Tourner extends Command {
-	private double angle;
+public class Avancer extends Command {
+	private double distance;
 	
-    public Tourner(double angle) {
-       this.angle = angle;
-    	
+    public Avancer(double distance) {
+        this.distance = distance; 
     	// Use requires() here to declare subsystem dependencies
-       requires(Robot.basePilotable);
-  
+        requires(Robot.basePilotable);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.basePilotable.resetGyro();
-    	Robot.basePilotable.setSetpointAngle(angle);
-    	Robot.basePilotable.setValeurAvance(0.0);
-    	Robot.basePilotable.enableAngle();
+    	Robot.basePilotable.resetEnc();
+    	Robot.basePilotable.setSetpointAngle(distance);
+    	Robot.basePilotable.setValeurAngle(0.0);
+    	Robot.basePilotable.enableDistance();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,17 +32,18 @@ public class Tourner extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.basePilotable.angleOnTarget();
+        return Robot.basePilotable.avanceOnTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.basePilotable.disableAngle();
+    	Robot.basePilotable.disableDistance();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    	
     }
 }

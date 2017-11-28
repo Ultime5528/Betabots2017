@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5528.robot;
 
+import org.usfirst.frc.team5528.robot.commands.Avancer;
 import org.usfirst.frc.team5528.robot.commands.OrienterTourelle;
 import org.usfirst.frc.team5528.robot.commands.SchedulePiston;
 import org.usfirst.frc.team5528.robot.commands.Shoot;
@@ -90,6 +91,9 @@ public class OI {
 		SmartDashboard.putData("Tourner 45", new Tourner(45.0));
 		SmartDashboard.putData("Tourner 90", new Tourner(90.0));
 		SmartDashboard.putData("Tourner -20", new Tourner(-20.0));
+		SmartDashboard.putData("Avancer 0.45", new Avancer(0.45));
+		SmartDashboard.putData("Avancer 0.90", new Avancer(1.0));
+		SmartDashboard.putData("Avancer -0.20", new Avancer(-0.25));
 		
 		
 	}

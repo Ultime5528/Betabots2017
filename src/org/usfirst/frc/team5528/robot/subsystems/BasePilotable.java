@@ -32,6 +32,7 @@ public class BasePilotable extends Subsystem {
 	private Encoder enc;
 	
 	
+	
 	private double valeurAvance = 0.0;
 	private double valeurAngle = 0.0;
 	public Object lock;
@@ -40,10 +41,11 @@ public class BasePilotable extends Subsystem {
 	public static double P_Avance = 0;
 	public static double I_Avance = 0;
 	public static double D_Avance = 0;
-	public static double P_Angle = 0;
-	public static double I_Angle = 0;
-	public static double D_Angle = 0;
-	public static double TOLERANCE_ANGLE = 0.2;
+	public static double P_Angle = -0.06;
+	public static double I_Angle = -0.007;
+	public static double D_Angle = -0.15;
+	public static double TOLERANCE_ANGLE = 0.07;
+	public static double Tolerance_AVANCE = 0.1;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
@@ -56,9 +58,11 @@ public class BasePilotable extends Subsystem {
 		LiveWindow.addActuator("BasePilotable","MoteurDroit", moteurDroit);
 		
 		robotDrive = new RobotDrive(moteurGauche, moteurDroit);
-		robotDrive.setMaxOutput(0.55);
+		robotDrive.setMaxOutput(0.7);
 		
 		enc = new Encoder(RobotMap.BasePilotable_Encoder_A,RobotMap.BasePilotable_Encoder_B);
+		enc.setDistancePerPulse(0.00023456);
+		
 		
 		gyro = new ADXRS450_Gyro();
 		LiveWindow.addSensor("BasePilotable","Gyro", gyro);
@@ -67,18 +71,23 @@ public class BasePilotable extends Subsystem {
 		lock = new Object();
 		
 		pidAvance = new PIDController(P_Avance, I_Avance, D_Avance, enc, this::setValeurAvance);
+		pidAvance.setAbsoluteTolerance(Tolerance_AVANCE);
+		pidAvance.setOutputRange(-1.0, 1.0);
 		
 		pidAngle = new PIDController(P_Angle, I_Angle, D_Angle, gyro, this::setValeurAngle);	
 		pidAngle.setAbsoluteTolerance(TOLERANCE_ANGLE);
-		pidAngle.setOutputRange(-0.6, 0.6);
+		pidAngle.setOutputRange(-1.0, 1.0);
 		
 	}
 	
 	public PIDController getPidAngle() {
 		return pidAngle;
 	}
+	public PIDController getPidAvance(){
+		return pidAngle;
+	}
 	
-	private void setValeurAvance(double valeur) {
+	public void setValeurAvance(double valeur) {
 		
 		synchronized (lock) {
 			valeurAvance = valeur;
@@ -86,7 +95,7 @@ public class BasePilotable extends Subsystem {
 		
 	}
 	 
-	private void setValeurAngle(double valeur) {
+	public void setValeurAngle(double valeur) {
 		
 		synchronized (lock) {
 			valeurAngle = valeur;
@@ -99,21 +108,33 @@ public class BasePilotable extends Subsystem {
 		pidAngle.setSetpoint(setpoint);
 	}
 	
+	public void setSetpointDistance(double setpoint){
+		pidAvance.setSetpoint(setpoint);
+	}
+	
 	public void enableAngle(){
 		pidAngle.enable();
+	}
+	public void enableDistance(){
+		pidAvance.enable();
 	}
 	
 	public void disableAngle(){
 		pidAngle.disable();
 	}
 	
+	public void disableDistance(){
+		pidAvance.disable();
+	}
 	public void resetGyro(){
 		gyro.reset();
 	}
 	
+	public void resetEnc(){
+		enc.reset();
+	}
 	
     public void drive() {
-    	SmartDashboard.putNumber("Angle", gyro.getAngle());
     	robotDrive.arcadeDrive(Robot.oi.getJoystick().getY()*-1, -1* Robot.oi.getJoystick().getX());
     }
     
@@ -135,9 +156,17 @@ public class BasePilotable extends Subsystem {
     	
     	return pidAngle.onTarget();
     }
+    public boolean avanceOnTarget(){
+    	
+    	return pidAvance.onTarget();
+    }
     
 	public double getAngle(){
 		return gyro.getAngle();
+	}
+	
+	public double getDistance(){
+		return enc.getDistance();
 	}
 	
 	public void drive(double move, double turn){

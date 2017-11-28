@@ -13,7 +13,6 @@ import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
 import org.usfirst.frc.team5528.robot.subsystems.Camera;
-import org.usfirst.frc.team5528.robot.subsystems.Shooter;
 import org.usfirst.frc.team5528.robot.subsystems.ShooterPiston;
 
 
@@ -28,7 +27,6 @@ public class Robot extends IterativeRobot {
 
 	
 	public static final BasePilotable basePilotable = new BasePilotable();
-	public static final Shooter shooter = new Shooter();
 	public static final Camera camera = new Camera();
 	public static final Tourelle tourelle = new Tourelle();
 	public static final ShooterPiston shooterPiston = new ShooterPiston();
@@ -96,6 +94,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		update();
 		SmartDashboard.putData("Scheduler", Scheduler.getInstance());
+		Robot.basePilotable.resetEnc();
 	}
 
 	/**
@@ -107,7 +106,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("pot", Robot.tourelle.getPosition());
 		SmartDashboard.putNumber("angle", Robot.basePilotable.getAngle());
-		
+		SmartDashboard.putNumber("distance",Robot.basePilotable.getDistance());
 	}
 
 	/**
@@ -123,13 +122,20 @@ public class Robot extends IterativeRobot {
 	public void update() {
 		
 		Shoot.TIMEOUT = Preferences.getInstance().getDouble("shoot_timeout", Shoot.TIMEOUT);
+		
 		BasePilotable.P_Angle = Preferences.getInstance().getDouble("p_angle", BasePilotable.P_Angle);
 		BasePilotable.I_Angle = Preferences.getInstance().getDouble("i_angle", BasePilotable.I_Angle);
 		BasePilotable.D_Angle = Preferences.getInstance().getDouble("d_angle", BasePilotable.D_Angle);
 		BasePilotable.TOLERANCE_ANGLE = Preferences.getInstance().getDouble("tolerance_angle", BasePilotable.TOLERANCE_ANGLE);
 		Robot.basePilotable.getPidAngle().setPID(BasePilotable.P_Angle, BasePilotable.I_Angle, BasePilotable.D_Angle);
 		Robot.basePilotable.getPidAngle().setAbsoluteTolerance(BasePilotable.TOLERANCE_ANGLE);
-	
+		
+		BasePilotable.P_Avance = Preferences.getInstance().getDouble("p_avance", BasePilotable.P_Avance);
+		BasePilotable.I_Avance = Preferences.getInstance().getDouble("i_avance", BasePilotable.I_Avance);
+		BasePilotable.D_Avance = Preferences.getInstance().getDouble("d_avance", BasePilotable.D_Avance);
+		BasePilotable.Tolerance_AVANCE = Preferences.getInstance().getDouble("tolerance_avance", BasePilotable.Tolerance_AVANCE);
+		Robot.basePilotable.getPidAvance().setPID(BasePilotable.P_Avance, BasePilotable.I_Avance, BasePilotable.D_Avance);
+		Robot.basePilotable.getPidAvance().setAbsoluteTolerance(BasePilotable.Tolerance_AVANCE);
 	}
 	
 	

@@ -13,8 +13,7 @@ public class RobotMap {
 	public final static int moteurdroit = 1;
 	//public final static int moteur = 7;
 	public final static int joystick = 0;
-	public final static int enc1a = 4;
-	public final static int enc1b = 5;
+
 	public final static int TOURELLE_MOTEUR = 2;
 	public final static int TOURELLE_POTENTIOMETRE = 0;	
 	public final static int SHOOTER_PISTON1_A = 4;
