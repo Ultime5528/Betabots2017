@@ -17,8 +17,7 @@ public class Shoot extends Command {
 
     public Shoot(int piston) {
     	this.piston = piston;
-    	// Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	
     	requires(Robot.shooterPiston);
     	setTimeout(TIMEOUT);
     }
