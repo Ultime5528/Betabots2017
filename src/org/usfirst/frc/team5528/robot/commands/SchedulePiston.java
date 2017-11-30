@@ -3,6 +3,7 @@ package org.usfirst.frc.team5528.robot.commands;
 import org.usfirst.frc.team5528.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
@@ -13,15 +14,21 @@ public class SchedulePiston extends InstantCommand {
 	private int piston;
 	
     public SchedulePiston(int piston) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    
+    
     	this.piston = piston;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(!Robot.shooterPiston.getQueue().offer(new ShootRetract(piston))) {
-    		DriverStation.reportError("Failed to offer Command to Queue", true);
+    	
+    	Command command;
+    	
+    		command = new ShootRetract(piston);
+    	
+    	
+    	if(!Robot.fileCommandes.offer(command)) {
+    		DriverStation.reportWarning("Failed to offer Command to Queue", false);
     	}
     }
 

@@ -3,20 +3,15 @@ package org.usfirst.frc.team5528.robot.commands;
 import org.usfirst.frc.team5528.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  *
  */
 public class PistonScheduler extends Command {
 
-	Command currentCommand = null;
 	
-    public PistonScheduler() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	public PistonScheduler() {
     	requires(Robot.shooterPiston);
-    	
     }
 
     // Called just before this Command runs the first time
@@ -26,10 +21,9 @@ public class PistonScheduler extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if(Robot.shooterPiston.getQueue().peek() != null) {
-    		currentCommand = Robot.shooterPiston.getQueue().poll();
-    		Robot.shooterPiston.setStartNextCommand(false);
-    		Scheduler.getInstance().add(currentCommand);
+    	if(Robot.fileCommandes.peek() != null) {
+    		Command command = Robot.fileCommandes.poll();
+    		command.start();
     	}
     	
     }

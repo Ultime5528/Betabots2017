@@ -19,46 +19,28 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class ShooterPiston extends Subsystem {
 
-
-
-
 	private DoubleSolenoid piston1;
 	private DoubleSolenoid piston2;
 	private DoubleSolenoid piston3;
 	private DoubleSolenoid piston4;
 
-	public Queue<Command> queue = new ArrayDeque<Command>();	
-	public boolean startNextCommand = false;
-
-
+	
 	public ShooterPiston(){
 
 		piston1 = new DoubleSolenoid(RobotMap.SHOOTER_PISTON1_A,RobotMap.SHOOTER_PISTON1_B);
 		LiveWindow.addActuator("ShooterPiston", "Piston1", piston1);
+		
 		piston2 = new DoubleSolenoid(RobotMap.SHOOTER_PISTON2_A,RobotMap.SHOOTER_PISTON2_B);
 		LiveWindow.addActuator("ShooterPiston", "Piston2", piston2);
+		
 		piston3 = new DoubleSolenoid(RobotMap.SHOOTER_PISTON3_A,RobotMap.SHOOTER_PISTON3_B);
 		LiveWindow.addActuator("ShooterPiston", "Piston3", piston3);
+		
 		piston4 = new DoubleSolenoid(RobotMap.SHOOTER_PISTON4_A,RobotMap.SHOOTER_PISTON4_B);
 		LiveWindow.addActuator("ShooterPiston", "Piston4", piston4);
 
 	}
 
-
-
-	public Queue<Command> getQueue()  {
-		return queue;
-	}
-
-
-	public void setStartNextCommand(boolean value) {
-		startNextCommand = value;
-	}
-
-
-	public boolean hasToStartNextCommand() {
-		return startNextCommand;
-	}
 
 	public void setForward(int piston){
 

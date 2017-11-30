@@ -6,12 +6,14 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.util.Queue;
 
 import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
+import org.usfirst.frc.team5528.robot.util.RestrictedQueue;
 import org.usfirst.frc.team5528.robot.subsystems.Camera;
 import org.usfirst.frc.team5528.robot.subsystems.ShooterPiston;
 
@@ -25,15 +27,15 @@ import org.usfirst.frc.team5528.robot.subsystems.ShooterPiston;
  */
 public class Robot extends IterativeRobot {
 
+	public static final int MAX_COMMANDES = 4;
 	
 	public static final BasePilotable basePilotable = new BasePilotable();
 	public static final Camera camera = new Camera();
 	public static final Tourelle tourelle = new Tourelle();
 	public static final ShooterPiston shooterPiston = new ShooterPiston();
+	public static final Queue<Command> fileCommandes = new RestrictedQueue<>(MAX_COMMANDES);
 
-	
 	public static OI oi;
-	
 	
 	
 	/**
