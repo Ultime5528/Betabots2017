@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5528.robot.subsystems;
 
 import org.usfirst.frc.team5528.robot.RobotMap;
+import org.usfirst.frc.team5528.robot.commands.MoveTourelle;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -16,10 +17,7 @@ public class Tourelle extends Subsystem {
 
     private VictorSP moteurTourelle;
     private AnalogPotentiometer pot;
-    public double tourellePos;
     
-    
-
 	public Tourelle(){
 		moteurTourelle = new VictorSP(RobotMap.TOURELLE_MOTEUR);
 		LiveWindow.addActuator("Tourelle", "moteur", moteurTourelle);
@@ -27,18 +25,21 @@ public class Tourelle extends Subsystem {
 		pot = new AnalogPotentiometer(RobotMap.TOURELLE_POTENTIOMETRE);
 		LiveWindow.addSensor("Tourelle", "potentiometre", pot);		
 	}
+	
 	public void tournerGauche(){
-		 moteurTourelle.set(0.25);
-		
+		 moteurTourelle.set(0.25);	
 	}
+	
+	
 	public void tournerDroite(){
-		moteurTourelle.set(0.25 * -1);
-		
+		moteurTourelle.set(0.25 * -1);	
 	}
+	
 	
 	public void stop(){
 		moteurTourelle.set(0);
 	}
+	
 	
 	public double getPosition() {
 		return pot.get();
@@ -47,7 +48,7 @@ public class Tourelle extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new MoveTourelle());
     }
 }
 

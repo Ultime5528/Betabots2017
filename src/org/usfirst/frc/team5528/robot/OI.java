@@ -3,10 +3,10 @@ package org.usfirst.frc.team5528.robot;
 import org.usfirst.frc.team5528.robot.commands.Avancer;
 import org.usfirst.frc.team5528.robot.commands.OrienterTourelle;
 import org.usfirst.frc.team5528.robot.commands.SchedulePiston;
-import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.commands.Tourner;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -46,6 +46,8 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	Joystick joystick; 
+	XboxController gamepad;
+	
 	JoystickButton button2;
 	JoystickButton button3, button4;
 	JoystickButton button11, button12;
@@ -54,6 +56,7 @@ public class OI {
 	public OI() {
 		
 		joystick = new Joystick(RobotMap.joystick);
+		gamepad = new XboxController(1);
 		
 		button1 = new JoystickButton(joystick, 1);
 		button1.whenPressed(new SchedulePiston(1));
@@ -85,8 +88,7 @@ public class OI {
 		
 		button11 = new JoystickButton(joystick, 11);
 		button11.whenPressed(new OrienterTourelle(0.458)); // Cotes libres
-		
-		
+	
 		
 		SmartDashboard.putData("Tourner 45", new Tourner(45.0));
 		SmartDashboard.putData("Tourner 90", new Tourner(90.0));
@@ -101,10 +103,14 @@ public class OI {
 	
 	
 	public Joystick getJoystick() {
-		
 		return joystick;
-		
 	}
+	
+	
+	public XboxController getGamepad() {
+		return gamepad;
+	}
+	
 }
 	
 
