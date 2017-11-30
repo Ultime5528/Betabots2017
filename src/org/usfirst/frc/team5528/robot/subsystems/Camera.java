@@ -10,8 +10,6 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 
-
-
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team5528.robot.GripPipeline;
 
@@ -33,8 +31,8 @@ public class Camera extends Subsystem {
 	private Object lock;
 	private BiConsumer<Double, Double> callback;
 	
-	public static int LARGEUR = 480;
-	public static int HAUTEUR = 360;
+	public static final int LARGEUR = 480;
+	public static final int HAUTEUR = 360;
 	
 	
     public Camera() {
@@ -50,10 +48,8 @@ public class Camera extends Subsystem {
     
     
     public void startLoop() {
-    	
     	Thread vision = new Thread(this::visionLoop);
     	vision.start();
-    	
     }
 	
     
@@ -88,8 +84,8 @@ public class Camera extends Subsystem {
     			e.printStackTrace();
     		}
     		
-    		
     	}
+    	
     }
     
     
@@ -97,7 +93,6 @@ public class Camera extends Subsystem {
     public void analyse(Mat input) {
     	
     	GripPipeline.getInstance().process(input);
-    	
     	
     	ArrayList<MatOfPoint> contours = GripPipeline.getInstance().filterContoursOutput();
     
@@ -120,14 +115,14 @@ public class Camera extends Subsystem {
     		
     	}
     	
-    	if(callback != null) {
-    		
+    	if(callback != null)
     		callback.accept(centre, hauteur);
-    	}
+    	
     }
     
     
     public void startVision(BiConsumer<Double, Double> callback) {
+    	
     	synchronized (lock) {
     		this.callback = callback;
     	}
@@ -138,15 +133,10 @@ public class Camera extends Subsystem {
         
     public void stopVision() {
     	runVision.set(false);
-    	
     }
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
+    
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 

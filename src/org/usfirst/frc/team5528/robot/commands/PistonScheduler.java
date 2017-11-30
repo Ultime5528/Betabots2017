@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class PistonScheduler extends Command {
 
-	
 	public PistonScheduler() {
     	requires(Robot.shooterPiston);
     }

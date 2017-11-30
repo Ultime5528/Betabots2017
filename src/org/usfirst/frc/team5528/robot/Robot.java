@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.Queue;
 
-import org.usfirst.frc.team5528.robot.commands.Shoot;
 import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
 import org.usfirst.frc.team5528.robot.util.RestrictedQueue;
@@ -33,6 +32,7 @@ public class Robot extends IterativeRobot {
 	public static final Camera camera = new Camera();
 	public static final Tourelle tourelle = new Tourelle();
 	public static final ShooterPiston shooterPiston = new ShooterPiston();
+	
 	public static final Queue<Command> fileCommandes = new RestrictedQueue<>(MAX_COMMANDES);
 
 	public static OI oi;
@@ -90,13 +90,10 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
 		update();
 		SmartDashboard.putData("Scheduler", Scheduler.getInstance());
 		Robot.basePilotable.resetEnc();
+		Robot.basePilotable.resetGyro();
 	}
 
 	/**
@@ -123,7 +120,7 @@ public class Robot extends IterativeRobot {
 	
 	public void update() {
 		
-		Shoot.TIMEOUT = Preferences.getInstance().getDouble("shoot_timeout", Shoot.TIMEOUT);
+		//Shoot.TIMEOUT = Preferences.getInstance().getDouble("shoot_timeout", Shoot.TIMEOUT);
 		/*
 		BasePilotable.P_Angle = Preferences.getInstance().getDouble("p_angle", BasePilotable.P_Angle);
 		BasePilotable.I_Angle = Preferences.getInstance().getDouble("i_angle", BasePilotable.I_Angle);

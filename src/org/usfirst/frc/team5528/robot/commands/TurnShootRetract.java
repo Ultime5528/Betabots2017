@@ -9,7 +9,7 @@ public class TurnShootRetract extends CommandGroup {
 
     public TurnShootRetract(double position, int piston) {
     	
-        addSequential(new OrienterTourelle(position));
+    	addSequential(new OrienterTourelle(position));
         addSequential(new ShootRetract(piston));
         
     }

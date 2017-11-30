@@ -1,16 +1,9 @@
 package org.usfirst.frc.team5528.robot.subsystems;
 
-import java.util.AbstractQueue;
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 import org.usfirst.frc.team5528.robot.RobotMap;
 import org.usfirst.frc.team5528.robot.commands.PistonScheduler;
-import org.usfirst.frc.team5528.robot.commands.StopPiston;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -41,40 +34,33 @@ public class ShooterPiston extends Subsystem {
 
 	}
 
+	
+	public void initDefaultCommand() {
+		setDefaultCommand(new PistonScheduler());
+	}
+	
 
 	public void setForward(int piston){
 
 		if(piston == 1){
-
 			piston1.set(DoubleSolenoid.Value.kForward);
 
 		}
 		else if(piston == 2){
-
-
 			piston2.set(DoubleSolenoid.Value.kForward);
 
 		}
 		else if (piston == 3){
-
 			piston3.set(DoubleSolenoid.Value.kForward);
 
 		}
 		else if  (piston == 4){
-
 			piston4.set(DoubleSolenoid.Value.kForward);
-
 
 		}
 
 	}
 
-
-
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new PistonScheduler());
-	}
 
 	public void setReverse(int piston) {
 
@@ -97,10 +83,10 @@ public class ShooterPiston extends Subsystem {
 	}
 
 	public void setAllOff() {
-
 		piston1.set(DoubleSolenoid.Value.kOff);
 		piston2.set(DoubleSolenoid.Value.kOff);
 		piston3.set(DoubleSolenoid.Value.kOff);
 		piston4.set(DoubleSolenoid.Value.kOff);
 	}
+	
 }

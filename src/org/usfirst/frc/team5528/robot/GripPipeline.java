@@ -6,8 +6,6 @@ import java.util.List;
 import org.opencv.core.*;
 import org.opencv.imgproc.*;
 
-import edu.wpi.first.wpilibj.DriverStation;
-
 
 /**
 * GripPipeline class.

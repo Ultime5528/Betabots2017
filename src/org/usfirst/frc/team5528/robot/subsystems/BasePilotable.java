@@ -1,8 +1,6 @@
 
 package org.usfirst.frc.team5528.robot.subsystems;
 
-import javax.sql.rowset.spi.SyncResolver;
-
 import org.usfirst.frc.team5528.robot.Robot;
 import org.usfirst.frc.team5528.robot.RobotMap;
 import org.usfirst.frc.team5528.robot.commands.Pilotage;
@@ -10,12 +8,10 @@ import org.usfirst.frc.team5528.robot.commands.Pilotage;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -26,11 +22,12 @@ public class BasePilotable extends Subsystem {
 	private VictorSP moteurGauche;
 	private VictorSP moteurDroit; 
 	private RobotDrive robotDrive;
+	
 	private ADXRS450_Gyro gyro;
-	private PIDController pidAvance;
-	private PIDController pidAngle;
 	private Encoder enc;
 	
+	private PIDController pidAvance;
+	private PIDController pidAngle;
 	
 	
 	private double valeurAvance = 0.0;
@@ -41,13 +38,13 @@ public class BasePilotable extends Subsystem {
 	public static double P_Avance = 0;
 	public static double I_Avance = 0;
 	public static double D_Avance = 0;
+	public static double TOLERANCE_ANGLE = 0.07;
+	
 	public static double P_Angle = -0.06;
 	public static double I_Angle = -0.007;
 	public static double D_Angle = -0.15;
-	public static double TOLERANCE_ANGLE = 0.07;
 	public static double Tolerance_AVANCE = 0.1;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+
 	
 	public BasePilotable(){
 		
@@ -62,7 +59,6 @@ public class BasePilotable extends Subsystem {
 		
 		enc = new Encoder(RobotMap.BasePilotable_Encoder_A,RobotMap.BasePilotable_Encoder_B);
 		enc.setDistancePerPulse(0.00023456);
-		
 		
 		gyro = new ADXRS450_Gyro();
 		LiveWindow.addSensor("BasePilotable","Gyro", gyro);
@@ -80,12 +76,16 @@ public class BasePilotable extends Subsystem {
 		
 	}
 	
+	
 	public PIDController getPidAngle() {
 		return pidAngle;
 	}
+	
+	
 	public PIDController getPidAvance(){
 		return pidAvance;
 	}
+	
 	
 	public void setValeurAvance(double valeur) {
 		
@@ -108,6 +108,7 @@ public class BasePilotable extends Subsystem {
 		pidAngle.setSetpoint(setpoint);
 	}
 	
+	
 	public void setSetpointDistance(double setpoint){
 		pidAvance.setSetpoint(setpoint);
 	}
@@ -115,6 +116,7 @@ public class BasePilotable extends Subsystem {
 	public void enableAngle(){
 		pidAngle.enable();
 	}
+	
 	public void enableDistance(){
 		pidAvance.enable();
 	}
@@ -126,6 +128,7 @@ public class BasePilotable extends Subsystem {
 	public void disableDistance(){
 		pidAvance.disable();
 	}
+	
 	public void resetGyro(){
 		gyro.reset();
 	}
@@ -135,8 +138,12 @@ public class BasePilotable extends Subsystem {
 	}
 	
     public void drive() {
-    	robotDrive.arcadeDrive(Robot.oi.getJoystick().getY()*-1, -1* Robot.oi.getJoystick().getX());
+    	robotDrive.arcadeDrive(-1.0 * Robot.oi.getJoystick().getY(), -1.0 * Robot.oi.getJoystick().getX());
     }
+    
+	public void drive(double move, double turn){
+		robotDrive.arcadeDrive(move, turn);
+	}
     
     public void drivePid(){
     	
@@ -153,11 +160,10 @@ public class BasePilotable extends Subsystem {
     }
   
     public boolean angleOnTarget(){
-    	
     	return pidAngle.onTarget();
     }
+    
     public boolean avanceOnTarget(){
-    	
     	return pidAvance.onTarget();
     }
     
@@ -168,16 +174,9 @@ public class BasePilotable extends Subsystem {
 	public double getDistance(){
 		return enc.getDistance();
 	}
-	
-	public void drive(double move, double turn){
-		
-		robotDrive.arcadeDrive(move, turn);
-	}
     
 	public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new Pilotage());
+        setDefaultCommand(new Pilotage());
     }
 
 }

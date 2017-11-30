@@ -12,8 +12,7 @@ public class StopPiston extends Command {
 	private int piston;
 
     public StopPiston(int piston) {
-        // Use requires() here to declare subsystem dependencies
-    	requires(Robot.shooterPiston);
+        requires(Robot.shooterPiston);
     	setTimeout(Shoot.TIMEOUT);
     	this.piston = piston;
     }

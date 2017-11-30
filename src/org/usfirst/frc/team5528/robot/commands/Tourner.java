@@ -9,14 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Tourner extends Command {
+	
 	private double angle;
 	
     public Tourner(double angle) {
        this.angle = angle;
-    	
-    	// Use requires() here to declare subsystem dependencies
        requires(Robot.basePilotable);
-  
     }
 
     // Called just before this Command runs the first time

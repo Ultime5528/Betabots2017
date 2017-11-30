@@ -13,7 +13,6 @@ public class OrienterTourelle extends Command {
 	
     public OrienterTourelle(double setpoint) {
     	this.setpoint = setpoint;
-        // Use requires() here to declare subsystem dependencies
         requires(Robot.tourelle);
     }
 
@@ -23,11 +22,13 @@ public class OrienterTourelle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(setpoint - Robot.tourelle.getPosition() > 0){
+    	
+    	if(setpoint - Robot.tourelle.getPosition() > 0)
     		Robot.tourelle.tournerGauche();
-    	}else{
+    	
+    	else
     		Robot.tourelle.tournerDroite();
-    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

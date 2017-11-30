@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Avancer extends Command {
+	
 	private double distance;
 	
     public Avancer(double distance) {
-        this.distance = distance; 
-    	// Use requires() here to declare subsystem dependencies
-        requires(Robot.basePilotable);
+    	this.distance = distance; 
+    	requires(Robot.basePilotable);
     }
 
     // Called just before this Command runs the first time
@@ -22,9 +22,9 @@ public class Avancer extends Command {
     	Robot.basePilotable.setSetpointDistance(distance);
     	Robot.basePilotable.setValeurAngle(0.0);
     	Robot.basePilotable.enableDistance();
-    	
     }
 
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.basePilotable.drivePid();
@@ -44,6 +44,5 @@ public class Avancer extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
-    	
     }
 }

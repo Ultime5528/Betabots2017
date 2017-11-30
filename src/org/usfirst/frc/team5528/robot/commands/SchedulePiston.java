@@ -14,6 +14,7 @@ public class SchedulePiston extends InstantCommand {
 	private int piston;
 	private double position;
 	
+	
     public SchedulePiston(int piston) {
     	this(piston, Double.NaN);
     }
@@ -38,7 +39,9 @@ public class SchedulePiston extends InstantCommand {
     	if(!Robot.fileCommandes.offer(command)) {
     		DriverStation.reportWarning("Failed to offer Command to Queue", false);
     	}
+    	
     }
+   
 
     // Called once after isFinished returns true
     protected void end() {

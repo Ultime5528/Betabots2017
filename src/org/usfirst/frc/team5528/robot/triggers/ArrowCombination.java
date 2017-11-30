@@ -18,6 +18,7 @@ public class ArrowCombination extends Button {
 		public int getButton();
 	}
 	
+	
 	public enum Arrow {
 		
 		NONE(-1),
@@ -25,6 +26,7 @@ public class ArrowCombination extends Button {
 		RIGHT(90);
 		
 		private int angle;
+		
 		private Arrow(int angle) {
 			this.angle = angle;
 		}
@@ -34,6 +36,7 @@ public class ArrowCombination extends Button {
 		}
 		
 	}
+	
 	
 	public enum XboxButton implements Button {
 		
@@ -55,6 +58,7 @@ public class ArrowCombination extends Button {
 		}
 		
 	}
+	
 	
 	private GenericHID hid;
 	private Arrow arrow;
