@@ -28,7 +28,7 @@ public class Tourelle extends Subsystem {
 	
 	
 	public void tournerGauche(){
-		if(getPosition() <= 0.45)
+		if(getPosition() <= 0.65)
 			moteurTourelle.set(VITESSE);	
 		else
 			stop();

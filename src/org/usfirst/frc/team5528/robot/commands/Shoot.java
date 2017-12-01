@@ -15,7 +15,7 @@ public class Shoot extends Command {
 
     public Shoot(int piston) {
     	requires(Robot.shooterPiston);
-    	setTimeout(TIMEOUT);
+    	setTimeout(TIMEOUT * 2);
     	this.piston = piston;
     }
 
