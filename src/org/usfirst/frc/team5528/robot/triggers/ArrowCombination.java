@@ -21,19 +21,22 @@ public class ArrowCombination extends Button {
 	
 	public enum Arrow {
 		
-		NONE(-1),
-		LEFT(270),
-		RIGHT(90);
+		NONE(-1, -1),
+		LEFT(225, 315),
+		RIGHT(45, 135);
 		
-		private int angle;
+		private int minAngle;
+		private int maxAngle;
 		
-		private Arrow(int angle) {
-			this.angle = angle;
+		private Arrow(int minAngle, int maxAngle) {
+			this.minAngle = minAngle;
+			this.maxAngle = maxAngle;
 		}
 		
-		private int getAngle() {
-			return angle;
+		private boolean isWithinRange(int pov) {
+			return pov >= minAngle && pov <= maxAngle;
 		}
+		
 		
 	}
 	
@@ -71,6 +74,6 @@ public class ArrowCombination extends Button {
 	}
 	
     public boolean get() {
-        return hid.getRawButton(button.getButton()) && hid.getPOV() == arrow.getAngle();
+        return hid.getRawButton(button.getButton()) && arrow.isWithinRange(hid.getPOV());
     }
 }
