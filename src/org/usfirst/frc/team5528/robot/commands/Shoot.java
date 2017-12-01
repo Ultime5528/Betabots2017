@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shoot extends Command {
 
-	public static double TIMEOUT = 0.5;
+	public static double TIMEOUT = 0.25;
 	
 	private int piston;
 
