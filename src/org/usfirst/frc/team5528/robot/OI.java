@@ -86,8 +86,8 @@ public class OI {
 		SmartDashboard.putData("Tourner 90", new Tourner(90.0));
 		SmartDashboard.putData("Tourner -20", new Tourner(-20.0));
 		SmartDashboard.putData("Avancer 0.45", new Avancer(0.45));
-		SmartDashboard.putData("Avancer 0.90", new Avancer(1.0));
-		SmartDashboard.putData("Avancer -0.20", new Avancer(-0.25));
+		SmartDashboard.putData("Avancer 1.0", new Avancer(1.0));
+		SmartDashboard.putData("Avancer -0.25", new Avancer(-0.25));
 		
 		
 	}

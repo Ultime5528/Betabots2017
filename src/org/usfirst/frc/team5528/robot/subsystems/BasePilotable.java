@@ -90,7 +90,8 @@ public class BasePilotable extends Subsystem {
 	public void setValeurAvance(double valeur) {
 		
 		synchronized (lock) {
-			valeurAvance = valeur;
+			valeurAvance = Math.abs(valeur) * 0.5 + 0.5;
+			valeurAvance *= Math.signum(valeur);
 		}
 		
 	}
@@ -130,10 +131,12 @@ public class BasePilotable extends Subsystem {
 	}
 	
 	public void resetGyro(){
+		pidAngle.reset();
 		gyro.reset();
 	}
 	
 	public void resetEnc(){
+		pidAvance.reset();
 		enc.reset();
 	}
 	

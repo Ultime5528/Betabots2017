@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.Queue;
 
+import org.usfirst.frc.team5528.robot.commands.Viser;
 import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
 import org.usfirst.frc.team5528.robot.util.RestrictedQueue;
@@ -135,6 +136,13 @@ public class Robot extends IterativeRobot {
 		BasePilotable.Tolerance_AVANCE = Preferences.getInstance().getDouble("tolerance_avance", BasePilotable.Tolerance_AVANCE);
 		Robot.basePilotable.getPidAvance().setPID(BasePilotable.P_Avance, BasePilotable.I_Avance, BasePilotable.D_Avance);
 		Robot.basePilotable.getPidAvance().setAbsoluteTolerance(BasePilotable.Tolerance_AVANCE);
+		
+		Viser.TOLERANCE = Preferences.getInstance().getDouble("viser_tolerance", Viser.TOLERANCE);
+		Viser.MIN = Preferences.getInstance().getDouble("viser_min", Viser.MIN);
+		Viser.MAX = Preferences.getInstance().getDouble("viser_max", Viser.MAX);
+		Viser.P = Preferences.getInstance().getDouble("viser_p", Viser.P);
+		
+		
 	}
 	
 	
