@@ -27,7 +27,7 @@ import org.usfirst.frc.team5528.robot.subsystems.ShooterPiston;
  */
 public class Robot extends IterativeRobot {
 
-	public static final int MAX_COMMANDES = 4;
+	public static final int MAX_COMMANDES = 3;
 	
 	public static final BasePilotable basePilotable = new BasePilotable();
 	public static final Camera camera = new Camera();

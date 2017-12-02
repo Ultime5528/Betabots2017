@@ -4,6 +4,9 @@ import org.usfirst.frc.team5528.robot.commands.Avancer;
 import org.usfirst.frc.team5528.robot.commands.OrienterTourelle;
 import org.usfirst.frc.team5528.robot.commands.SchedulePiston;
 import org.usfirst.frc.team5528.robot.commands.Tourner;
+import org.usfirst.frc.team5528.robot.triggers.ArrowCombination;
+import org.usfirst.frc.team5528.robot.triggers.ArrowCombination.Arrow;
+import org.usfirst.frc.team5528.robot.triggers.ArrowCombination.XboxButton;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -34,6 +37,17 @@ public class OI {
 	JoystickButton button11;
 	JoystickButton button12;
 	
+	ArrowCombination rb;
+	ArrowCombination lb;
+	ArrowCombination droiteB;
+	ArrowCombination centreB;
+	ArrowCombination centreX;
+	ArrowCombination gaucheX;
+	ArrowCombination droiteA;
+	ArrowCombination droiteY;
+	ArrowCombination centreY;
+	ArrowCombination gaucheY;
+	ArrowCombination gaucheA;
 	public OI() {
 		
 		// Joystick et manette
@@ -79,6 +93,51 @@ public class OI {
 		button11 = new JoystickButton(joystick, 11);
 		button11.whenPressed(new OrienterTourelle(0.458)); // Cotes libres
 	
+		 
+		gaucheA = new ArrowCombination(gamepad, Arrow.LEFT, XboxButton.A);
+		gaucheA.whenPressed(new SchedulePiston(3, 0.52));
+		
+		
+		gaucheY = new ArrowCombination(gamepad, Arrow.LEFT, XboxButton.Y);
+		gaucheY.whenPressed(new SchedulePiston(3, 0.459));
+		
+		
+		centreY = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.Y );
+		centreY.whenPressed(new SchedulePiston(3, 0.391));
+		
+		
+		droiteY = new ArrowCombination(gamepad, Arrow.RIGHT, XboxButton.Y);
+		droiteY.whenPressed(new SchedulePiston(3, 0.327));
+		
+		
+		droiteA = new ArrowCombination(gamepad, Arrow.RIGHT, XboxButton.A);
+		droiteA.whenPressed(new SchedulePiston(3, 0.26));
+		
+		
+		gaucheX = new ArrowCombination(gamepad, Arrow.LEFT, XboxButton.X);
+		gaucheX.whenPressed(new SchedulePiston(2, 0.34));
+		
+		
+		centreX = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.X);
+		centreX.whenPressed(new SchedulePiston(2, 0.266));
+		//a essayer
+		
+		centreB = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.B);
+		centreB.whenPressed(new SchedulePiston(2, 0.185));
+		
+		
+		droiteB = new ArrowCombination(gamepad, Arrow.RIGHT, XboxButton.B);
+		droiteB.whenPressed(new SchedulePiston(2, 0.088));
+		
+		
+		lb = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.LB);
+		lb.whenPressed(new SchedulePiston(1, 0.391));
+		
+		
+		rb = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.RB);
+		rb.whenPressed(new SchedulePiston(4, 0.391));
+		
+		
 		
 		// Commandes test PID
 		

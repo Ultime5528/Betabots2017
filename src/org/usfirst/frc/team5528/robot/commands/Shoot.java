@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shoot extends Command {
 
-	public static double TIMEOUT = 0.5;
+	public static double TIMEOUT = 0.25;
 	
 	private int piston;
 
     public Shoot(int piston) {
     	requires(Robot.shooterPiston);
-    	setTimeout(TIMEOUT);
+    	setTimeout(TIMEOUT * 2);
     	this.piston = piston;
     }
 

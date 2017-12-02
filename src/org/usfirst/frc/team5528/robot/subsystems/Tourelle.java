@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Tourelle extends Subsystem {
 
+	public static double VITESSE = 0.4;
+	
     private VictorSP moteurTourelle;
     private AnalogPotentiometer pot;
     
@@ -26,15 +28,21 @@ public class Tourelle extends Subsystem {
 	
 	
 	public void tournerGauche(){
-		 moteurTourelle.set(0.25);	
+		if(getPosition() <= 0.65)
+			moteurTourelle.set(VITESSE);	
+		else
+			stop();
 	}
 	
 	public void tournerDroite(){
-		moteurTourelle.set(-0.25);	
+		if(getPosition() >= 0.05)
+			moteurTourelle.set(-1.0 * VITESSE);	
+		else
+			stop();
 	}
 	
 	public void stop(){
-		moteurTourelle.set(0);
+		moteurTourelle.set(0.0);
 	}
 	
 	public double getPosition() {
