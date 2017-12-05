@@ -14,9 +14,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Viser extends Command {
 
 	public static double TOLERANCE = 0.5;
-	public static double MIN = 0.2;
-	public static double MAX = 0.4;
+	public static double MIN = 0.4;
+	public static double MAX = 0.65;
 	public static double P = 0.2;
+	public static double MOVE = 0.75;
+	public static double OFFSET = 16;
 	
 	public static double FOV_X = 46.98;
 	
@@ -30,7 +32,10 @@ public class Viser extends Command {
         requires(Robot.basePilotable);
         requires(Robot.camera);
         
+        lock = new Object();
+        
         hasChanged = new AtomicBoolean(false);
+        setTimeout(1.0);
     }
 
     // Called just before this Command runs the first time
@@ -50,6 +55,8 @@ public class Viser extends Command {
 				centre = _centre;
 				hauteur = _hauteur;
 			}
+    		
+    		centre += OFFSET;
     		
     		SmartDashboard.putNumber("Centre", centre);
         	SmartDashboard.putNumber("Hauteur", hauteur);
@@ -75,15 +82,18 @@ public class Viser extends Command {
     		if(rotate > MAX)
     			rotate = MAX;
     		
-    		rotate *= Math.signum(error);
+    		rotate *= -Math.signum(error);
     		
     	}
     	
-    	if(hauteur != 0.0 )
+    	
+    	if(hauteur != 0.0 && hauteur <= 19.0)
+    		move = MOVE;
+    	
     	
     	SmartDashboard.putNumber("Rotate", rotate);
     	SmartDashboard.putNumber("error", error);
-    	Robot.basePilotable.drive(0.0, rotate);
+    	Robot.basePilotable.drive(move, rotate);
     	
     	
     	
@@ -91,17 +101,20 @@ public class Viser extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut() && hauteur >= 21 && Math.abs(angle - Robot.basePilotable.getAngle()) < TOLERANCE;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.camera.stopVision();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
+   
     
     public void setValeurs(double centre, double hauteur) {
     	

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Tourelle extends Subsystem {
 
-	public static double VITESSE = 0.4;
+	public static double VITESSE = 0.3;
 	
     private VictorSP moteurTourelle;
     private AnalogPotentiometer pot;

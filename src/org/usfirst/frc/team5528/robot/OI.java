@@ -4,6 +4,9 @@ import org.usfirst.frc.team5528.robot.commands.Avancer;
 import org.usfirst.frc.team5528.robot.commands.OrienterTourelle;
 import org.usfirst.frc.team5528.robot.commands.SchedulePiston;
 import org.usfirst.frc.team5528.robot.commands.Tourner;
+import org.usfirst.frc.team5528.robot.commands.TournerViser;
+import org.usfirst.frc.team5528.robot.commands.Viser;
+import org.usfirst.frc.team5528.robot.commands.Vision;
 import org.usfirst.frc.team5528.robot.triggers.ArrowCombination;
 import org.usfirst.frc.team5528.robot.triggers.ArrowCombination.Arrow;
 import org.usfirst.frc.team5528.robot.triggers.ArrowCombination.XboxButton;
@@ -48,6 +51,8 @@ public class OI {
 	ArrowCombination centreY;
 	ArrowCombination gaucheY;
 	ArrowCombination gaucheA;
+	
+	
 	public OI() {
 		
 		// Joystick et manette
@@ -73,10 +78,10 @@ public class OI {
 		// Tourelle (mauvaises positions)
 		
 		button5 = new JoystickButton(joystick, 5);
-		button5.whenPressed(new OrienterTourelle(0.43));
+		button5.toggleWhenPressed(new Vision());
 		
 		button6 = new JoystickButton(joystick, 6);
-		button6.whenPressed(new OrienterTourelle(0.35));
+		button6.toggleWhenPressed(new TournerViser());
 		
 		
 		// Tourelle (bonne position)

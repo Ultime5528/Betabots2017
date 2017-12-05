@@ -141,6 +141,8 @@ public class Robot extends IterativeRobot {
 		Viser.MIN = Preferences.getInstance().getDouble("viser_min", Viser.MIN);
 		Viser.MAX = Preferences.getInstance().getDouble("viser_max", Viser.MAX);
 		Viser.P = Preferences.getInstance().getDouble("viser_p", Viser.P);
+		Viser.MOVE = Preferences.getInstance().getDouble("viser_move", Viser.MOVE);
+		Viser.OFFSET = Preferences.getInstance().getDouble("viser_offset", Viser.OFFSET);
 		
 		
 	}
