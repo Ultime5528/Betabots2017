@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OrienterTourelle extends Command {
 
+	public static double OFFSET = 0.0;
+	
 	private double setpoint;
 	
     public OrienterTourelle(double setpoint) {
@@ -23,7 +25,7 @@ public class OrienterTourelle extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if(setpoint - Robot.tourelle.getPosition() > 0)
+    	if(setpoint + OFFSET - Robot.tourelle.getPosition() > 0)
     		Robot.tourelle.tournerGauche();
     	
     	else
@@ -33,7 +35,7 @@ public class OrienterTourelle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Math.abs(Robot.tourelle.getPosition() - setpoint) < 0.01);
+        return (Math.abs(setpoint + OFFSET - Robot.tourelle.getPosition()) < 0.01);
     }
 
     // Called once after isFinished returns true

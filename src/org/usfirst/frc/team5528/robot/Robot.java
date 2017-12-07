@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.Queue;
 
+import org.usfirst.frc.team5528.robot.commands.AutonomeCour;
+import org.usfirst.frc.team5528.robot.commands.AutonomeJardin;
 import org.usfirst.frc.team5528.robot.commands.Viser;
 import org.usfirst.frc.team5528.robot.subsystems.BasePilotable;
 import org.usfirst.frc.team5528.robot.subsystems.Tourelle;
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	
+	private Command autonome;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -78,7 +81,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		autonome = new AutonomeJardin();
+		autonome.start();
 	}
 
 	/**
@@ -91,6 +95,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		
+		if(autonome != null){
+			autonome.cancel();
+		}
+			
+		
 		update();
 		SmartDashboard.putData("Scheduler", Scheduler.getInstance());
 		Robot.basePilotable.resetEnc();

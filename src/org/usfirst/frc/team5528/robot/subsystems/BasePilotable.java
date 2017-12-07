@@ -35,7 +35,7 @@ public class BasePilotable extends Subsystem {
 	public Object lock;
 	
 	
-	public static double P_Avance = 0;
+	public static double P_Avance = 0.5;
 	public static double I_Avance = 0;
 	public static double D_Avance = 0;
 	public static double TOLERANCE_ANGLE = 0.07;

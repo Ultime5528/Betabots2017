@@ -41,6 +41,20 @@ public class Tourelle extends Subsystem {
 			stop();
 	}
 	
+	public void tournerGaucheLent(){
+		if(getPosition() <= 0.65)
+			moteurTourelle.set(VITESSE/2);	
+		else
+			stop();
+	}
+	
+	public void tournerDroiteLent(){
+		if(getPosition() >= 0.05)
+			moteurTourelle.set(-1.0 * VITESSE/2);	
+		else
+			stop();
+	}
+	
 	public void stop(){
 		moteurTourelle.set(0.0);
 	}

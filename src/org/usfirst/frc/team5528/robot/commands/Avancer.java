@@ -14,6 +14,7 @@ public class Avancer extends Command {
     public Avancer(double distance) {
     	this.distance = distance; 
     	requires(Robot.basePilotable);
+    	setTimeout(4);
     }
 
     // Called just before this Command runs the first time
@@ -32,7 +33,7 @@ public class Avancer extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.basePilotable.avanceOnTarget();
+        return Robot.basePilotable.avanceOnTarget() || isTimedOut();
     }
 
     // Called once after isFinished returns true

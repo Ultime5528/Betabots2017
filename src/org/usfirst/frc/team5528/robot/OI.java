@@ -6,6 +6,7 @@ import org.usfirst.frc.team5528.robot.commands.SchedulePiston;
 import org.usfirst.frc.team5528.robot.commands.Tourner;
 import org.usfirst.frc.team5528.robot.commands.TournerViser;
 import org.usfirst.frc.team5528.robot.commands.Viser;
+import org.usfirst.frc.team5528.robot.commands.ViserTourelle;
 import org.usfirst.frc.team5528.robot.commands.Vision;
 import org.usfirst.frc.team5528.robot.triggers.ArrowCombination;
 import org.usfirst.frc.team5528.robot.triggers.ArrowCombination.Arrow;
@@ -90,7 +91,7 @@ public class OI {
 		button7.whenPressed(new OrienterTourelle(0.322)); // Avec 2 a gauche
 		
 		button8 = new JoystickButton(joystick, 8);
-		button8.whenPressed(new OrienterTourelle(0.226)); // Avec 2 a droite
+		button8.toggleWhenPressed(new ViserTourelle()); // Avec 2 a droite
 		
 		button9 = new JoystickButton(joystick, 9);
 		button9.whenPressed(new OrienterTourelle(0.478)); // Camera centree
