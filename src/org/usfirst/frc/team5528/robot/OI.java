@@ -15,6 +15,8 @@ import org.usfirst.frc.team5528.robot.triggers.ArrowCombination.XboxButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -38,6 +40,7 @@ public class OI {
 	JoystickButton button8;
 	JoystickButton button9;
 	
+	
 	JoystickButton button11;
 	JoystickButton button12;
 	
@@ -52,6 +55,7 @@ public class OI {
 	ArrowCombination centreY;
 	ArrowCombination gaucheY;
 	ArrowCombination gaucheA;
+	JoystickButton start;
 	
 	
 	public OI() {
@@ -143,6 +147,9 @@ public class OI {
 		rb = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.RB);
 		rb.whenPressed(new SchedulePiston(4, 0.391));
 		
+		start = new JoystickButton(gamepad, 8);
+		start.toggleWhenPressed(new ViserTourelle());
+		
 		
 		
 		// Commandes test PID
@@ -160,6 +167,7 @@ public class OI {
 	
 	
 	public Joystick getJoystick() {
+		SmartDashboard.putNumber("joystick y", joystick.getY());
 		return joystick;
 	}
 	

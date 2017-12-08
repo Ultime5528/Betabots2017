@@ -35,16 +35,15 @@ public class BasePilotable extends Subsystem {
 	public Object lock;
 	
 	
-	public static double P_Avance = 0.5;
+	public static double P_Avance = 0.55;
 	public static double I_Avance = 0;
-	public static double D_Avance = 0;
-	public static double TOLERANCE_ANGLE = 0.07;
+	public static double D_Avance = 0.0;
+	public static double Tolerance_AVANCE = 0.0007;
 	
 	public static double P_Angle = -0.06;
 	public static double I_Angle = -0.007;
 	public static double D_Angle = -0.15;
-	public static double Tolerance_AVANCE = 0.1;
-
+	public static double TOLERANCE_ANGLE = 0.07;
 	
 	public BasePilotable(){
 		
@@ -95,11 +94,24 @@ public class BasePilotable extends Subsystem {
 		}
 		
 	}
+	
+	public double getValeurAvance() {
+		
+		double val;
+		
+		synchronized (lock) {
+			val = valeurAvance;
+		}
+		
+		return val;
+	}
+	
 	 
 	public void setValeurAngle(double valeur) {
 		
 		synchronized (lock) {
-			valeurAngle = valeur;
+			valeurAngle = Math.abs(valeur) * 0.65 + 0.35;
+			valeurAngle *= Math.signum(valeur);
 		}
 		
 	}

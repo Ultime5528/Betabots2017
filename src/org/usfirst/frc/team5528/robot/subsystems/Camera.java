@@ -127,10 +127,12 @@ public class Camera extends Subsystem {
     		
     		Rect rect = Imgproc.boundingRect(c);
     		
-    		//System.out.println("Width : " + rect.width + "\tHeight : " + rect.height);
+    		System.out.println("Width : " + rect.width + "\tHeight : " + rect.height);
     		
-    		if(rect.width <= 5 || rect.width >= 80)
+    		double ratio = rect.width / (double) rect.height; 
+    		if(rect.width <= 10 || rect.width >= 53 || rect.height >= 32 || rect.height <= 5 || ratio >3.5 || ratio < 1.5 )
     			continue;
+    		
     		
     		contours.add(c);
     		Imgproc.rectangle(input, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0));
@@ -139,7 +141,7 @@ public class Camera extends Subsystem {
     	
     	
     	
-    	double centre = 0; 
+    	double centre = LARGEUR / 2.0; 
     	double hauteur = 0;
     	
     	if(contours.size() == 0) {

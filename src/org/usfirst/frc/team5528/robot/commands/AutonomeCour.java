@@ -9,11 +9,18 @@ public class AutonomeCour extends CommandGroup {
 
     public AutonomeCour() {
         // Add Commands here:
-        addSequential(new Avancer(0.90));
-        addSequential(new Tourner(-25));
-        addSequential(new TournerViser());
-        // these will run in order.
-
+    	// Add Commands here:
+        addSequential(new Avancer(1.15));
+        addSequential(new Tourner(-33));
+        addSequential(new Avancer(0.45));
+       // addSequential(new TournerViser());
+        addSequential(new AvancerTemps(0.45, 1.2));
+        addSequential(new ViserTourelle());
+        addSequential(new TurnShootRetract(0.391, 3));
+        addSequential(new TurnShootRetract(0.266, 2));
+        addSequential(new Avancer(-0.50));
+        addSequential(new Tourner(80));
+        addSequential(new Avancer(-0.50));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

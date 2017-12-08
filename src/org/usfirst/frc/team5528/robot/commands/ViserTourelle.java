@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ViserTourelle extends Command {
 
-	
-	 
 	public static double MAX = 0.0945;
 	public static double MIN = -0.0945;
 	
@@ -67,6 +65,7 @@ public class ViserTourelle extends Command {
     protected void end() {
     	Robot.camera.stopVision();
     	Robot.tourelle.stop();
+    	OrienterTourelle.OFFSET = Robot.tourelle.getPosition() - 0.391;
     }
 
     // Called when another command which requires one or more of the same

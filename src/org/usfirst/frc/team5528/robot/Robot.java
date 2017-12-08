@@ -6,8 +6,10 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.rmi.activation.ActivationGroupDesc.CommandEnvironment;
 import java.util.Queue;
 
 import org.usfirst.frc.team5528.robot.commands.AutonomeCour;
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 	private Command autonome;
+	private SendableChooser<Command> chooser;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -51,6 +54,10 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();	
 		camera.startLoop();
+		chooser = new SendableChooser<>();
+		chooser.addDefault("Autonome jardin", new AutonomeJardin());
+		chooser.addObject("Autonome cour", new AutonomeCour());
+		SmartDashboard.putData("Choix autonome", chooser);
 	}
 
 	/**
@@ -81,8 +88,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonome = new AutonomeJardin();
-		autonome.start();
+		autonome = chooser.getSelected();
+		if(autonome != null ){
+			autonome.start();	
+		}
+		
 	}
 
 	/**

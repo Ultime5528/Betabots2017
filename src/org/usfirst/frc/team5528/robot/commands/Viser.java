@@ -16,9 +16,9 @@ public class Viser extends Command {
 	public static double TOLERANCE = 0.5;
 	public static double MIN = 0.4;
 	public static double MAX = 0.65;
-	public static double P = 0.2;
-	public static double MOVE = 0.75;
-	public static double OFFSET = 16;
+	public static double P = 0.1;
+	public static double MOVE = 0.72;
+	public static double OFFSET = 30;
 	
 	public static double FOV_X = 46.98;
 	
